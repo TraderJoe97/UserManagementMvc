@@ -1,12 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.Security.Claims;
-using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
 
 namespace UserManagementMvc.Areas.Identity.Pages.Account
 {
@@ -63,7 +60,7 @@ namespace UserManagementMvc.Areas.Identity.Pages.Account
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
+                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
@@ -77,6 +74,8 @@ namespace UserManagementMvc.Areas.Identity.Pages.Account
                 }
             }
 
+            // If we got this far, something failed.
             return Page();
         }
     }
+}
