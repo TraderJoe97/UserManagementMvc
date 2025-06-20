@@ -27,4 +27,7 @@ RUN dotnet publish "./UserManagementMvc.csproj" -c $BUILD_CONFIGURATION -o /app/
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
+# Apply database migrations
+RUN dotnet ef database update --verbosity silent
 ENTRYPOINT ["dotnet", "UserManagementMvc.dll"]
