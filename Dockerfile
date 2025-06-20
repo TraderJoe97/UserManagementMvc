@@ -28,6 +28,8 @@ FROM mcr.microsoft.com/dotnet/sdk:9.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-# Apply database migrations
+# Set the working directory to the project directory and install dotnet-ef globally
+WORKDIR /app
+RUN dotnet tool install --global dotnet-ef
 RUN dotnet ef database update --verbosity silent
 ENTRYPOINT ["dotnet", "UserManagementMvc.dll"]
