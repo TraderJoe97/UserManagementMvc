@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Welcome";
+}
+<h2>Welcome, @ViewBag.Username!</h2>
+<p>Email: @ViewBag.Email</p>
+<p>
+    <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword">Change Password</a>
+</p>
+<form asp-area="Identity" asp-page="/Account/Logout" method="post">
+    <button type="submit" class="btn btn-danger">Logout</button>
+</form>
