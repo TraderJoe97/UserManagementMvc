@@ -24,12 +24,7 @@ ARG BUILD_CONFIGURATION=Release
 RUN dotnet publish "./UserManagementMvc.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS final
+FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-
-# Set the working directory to the project directory and install dotnet-ef globally
-WORKDIR /app
-RUN dotnet tool install --global dotnet-ef
-RUN dotnet ef database update --verbosity silent
 ENTRYPOINT ["dotnet", "UserManagementMvc.dll"]
