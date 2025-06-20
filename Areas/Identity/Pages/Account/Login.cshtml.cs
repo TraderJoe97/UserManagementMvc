@@ -78,4 +78,4 @@ namespace UserManagementMvc.Areas.Identity.Pages.Account
             return Page();
         }
     }
-}
+    }
